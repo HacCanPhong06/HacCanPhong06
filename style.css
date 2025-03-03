@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    color: #333;
+}
+
+.form-container {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.post {
+    background: white;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 400px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+.comment-section {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.comment-section h4 {
+    margin: 0;
+}
+
+.comment-section input {
+    width: 80%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.comment-section button {
+    padding: 5px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-section button:hover {
+    background-color: #218838;
+}
