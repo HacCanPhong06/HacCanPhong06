@@ -1,19 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #222;
-    color: #fff;
-}
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background: #333;
-}
-button {
-    background: #ff9800;
+    background-color: black;
     color: white;
-    padding: 5px 10px;
+    font-family: 'Times New Roman', serif;
 }
-main {
-    padding: 20px;
+
+.login-container, .register-container {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+input, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+button {
+    background-color: purple;
+    color: white;
+    border: none;
 }
