@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Đăng Nhập</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng Nhập</button>
+    <p>Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+
+    <script>
+        function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            let user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem("user", JSON.stringify(user));
+                alert("Đăng nhập thành công!");
+                window.location.href = "index.html";
+            } else {
+                alert("Sai email hoặc mật khẩu!");
+            }
+        }
+    </script>
+</body>
+</html>
