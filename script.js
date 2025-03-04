@@ -1,50 +1,72 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Chế độ Dark Mode
-    let mode = localStorage.getItem("theme") || "dark";
-    document.body.classList.toggle("light-mode", mode === "light");
+// ĐĂNG KÝ NGƯỜI DÙNG
+document.getElementById("register-btn").addEventListener("click", function () {
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("register-email").value;
+    let password = document.getElementById("register-password").value;
 
-    document.getElementById("toggle-mode").addEventListener("click", function () {
-        mode = mode === "dark" ? "light" : "dark";
-        localStorage.setItem("theme", mode);
-        document.body.classList.toggle("light-mode", mode === "light");
-        this.textContent = mode === "light" ? "🌞 Chế độ sáng" : "🌙 Chế độ tối";
-    });
-
-    // Kiểm tra đăng nhập
-    let user = localStorage.getItem("user");
-    if (user) {
-        let userData = JSON.parse(user);
-        document.getElementById("login-link").textContent = `Xin chào, ${userData.name}`;
-        if (userData.role === "admin") {
-            document.getElementById("admin-link").style.display = "inline";
-        }
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    
+    if (users.some(user => user.email === email)) {
+        alert("Email đã tồn tại!");
+        return;
     }
 
-    // Load truyện hot và bình luận gần đây
-    loadHotStories();
-    loadRecentComments();
+    users.push({ username, email, password, role: "user" });
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Đăng ký thành công! Hãy đăng nhập.");
 });
 
-function loadHotStories() {
+// ĐĂNG NHẬP NGƯỜI DÙNG
+document.getElementById("login-btn").addEventListener("click", function () {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let user = users.find(user => user.email === email && user.password === password);
+
+    if (!user) {
+        alert("Sai email hoặc mật khẩu!");
+        return;
+    }
+
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
+    if (user.role === "admin") {
+        window.location.href = "dashboard.html";
+    } else {
+        window.location.href = "index.html";
+    }
+});
+
+// ĐĂNG XUẤT
+document.getElementById("logout-btn").addEventListener("click", function () {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+});
+
+// LOAD DỮ LIỆU TRUYỆN
+function loadStories() {
     let stories = JSON.parse(localStorage.getItem("stories")) || [];
-    let hotStories = stories.sort((a, b) => b.views - a.views).slice(0, 5);
-    let container = document.getElementById("hot-stories");
-    container.innerHTML = hotStories.map(story =>
-        `<div class="story">
-            <img src="${story.cover}" alt="${story.title}">
-            <h3>${story.title}</h3>
-            <p>${story.views} lượt đọc</p>
-        </div>`
-    ).join("");
+    let storyList = document.getElementById("hot-stories");
+    
+    storyList.innerHTML = "";
+    stories.forEach(story => {
+        let storyDiv = document.createElement("div");
+        storyDiv.innerHTML = `<h3>${story.title}</h3><p>${story.category}</p>`;
+        storyList.appendChild(storyDiv);
+    });
 }
 
-function loadRecentComments() {
-    let comments = JSON.parse(localStorage.getItem("comments")) || [];
-    let recentComments = comments.slice(-5);
-    let container = document.getElementById("recent-comments");
-    container.innerHTML = recentComments.map(comment =>
-        `<div class="comment">
-            <p><strong>${comment.user}:</strong> ${comment.text}</p>
-        </div>`
-    ).join("");
-                        }
+// ADMIN THÊM TRUYỆN
+document.getElementById("add-story-btn").addEventListener("click", function () {
+    let title = document.getElementById("title").value;
+    let category = document.getElementById("category").value;
+    let description = document.getElementById("description").value;
+
+    let stories = JSON.parse(localStorage.getItem("stories")) || [];
+    stories.push({ title, category, description });
+    localStorage.setItem("stories", JSON.stringify(stories));
+
+    loadStories();
+});
