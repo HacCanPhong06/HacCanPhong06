@@ -4,29 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Trang Chủ</h1>
-    <button onclick="logout()">Đăng xuất</button>
 
-    <!-- Khu vực hiển thị truyện -->
-    <h2>Danh sách truyện</h2>
-    <div id="story-list"></div>
+<h1>Trang Chủ</h1>
+<button onclick="logout()">Đăng Xuất</button>
 
-    <!-- Khu vực dành riêng cho Admin -->
-    <div id="admin-section" style="display: none;">
-        <h2>Quản lý truyện</h2>
-        <input type="text" id="new-story-title" placeholder="Tên truyện">
-        <button onclick="addStory()">Thêm truyện</button>
-    </div>
-
-    <script src="script.js"></script>
-<div id="admin-panel" style="display: none;">
-    <h2>Đăng truyện mới</h2>
-    <input type="text" id="story-title" placeholder="Tên truyện">
-    <textarea id="story-content" placeholder="Nội dung truyện"></textarea>
-    <button onclick="addStory()">Đăng truyện</button>
+<!-- Chỉ Admin mới thấy phần này -->
+<div id="admin-section" class="hidden">
+    <h2>Quản lý truyện</h2>
+    <input type="text" id="new-story-title" placeholder="Nhập tên truyện">
+    <button onclick="addStory()">Thêm truyện</button>
 </div>
+
+<h2>Danh sách truyện</h2>
+<div id="story-list"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
