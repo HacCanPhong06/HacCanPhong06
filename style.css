@@ -1,63 +1,19 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #121212;
-    color: white;
+    background: #222;
+    color: #fff;
 }
-
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #222;
+    padding: 10px;
+    background: #333;
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    width: 50px;
-    margin-right: 10px;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 10px;
-}
-
-nav ul li a {
+button {
+    background: #ff9800;
     color: white;
-    text-decoration: none;
+    padding: 5px 10px;
 }
-
-#toggle-mode {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 main {
     padding: 20px;
 }
-
-h2 {
-    border-bottom: 2px solid white;
-    padding-bottom: 5px;
-}
-
-#hot-stories, #category-list, #recent-comments {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    }
