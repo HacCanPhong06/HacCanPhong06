@@ -1,67 +1,91 @@
-// 🟢 Cấu hình Google Login
-function signIn() {
-    gapi.auth2.getAuthInstance().signIn().then(googleUser => {
-        let profile = googleUser.getBasicProfile();
-        let email = profile.getEmail();
-
-        localStorage.setItem("userEmail", email);
-        document.getElementById("user-info").textContent = `Chào, ${profile.getName()} (${email})`;
+// Kiểm tra đăng nhập
+window.onload = function() {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
         document.getElementById("login-btn").style.display = "none";
         document.getElementById("logout-btn").style.display = "block";
+        document.getElementById("user-info").textContent = `Chào, ${user.username} (${user.email})`;
+        checkAdmin(user.email);
+    }
+    loadPosts();
+};
 
-        checkAdmin(email);
-    });
+// Hiển thị form đăng nhập
+function showLogin() {
+    document.getElementById("auth-form").classList.toggle("hidden");
 }
 
-// 🟢 Kiểm tra Admin
-function checkAdmin(email) {
-    let adminEmail = "sachcuameonho@gmail.com"; 
-    document.getElementById("story-form").style.display = (email === adminEmail) ? "block" : "none";
-}
+// Đăng ký
+function register() {
+    let email = document.getElementById("email").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-// 🟢 Đăng xuất
-function signOut() {
-    gapi.auth2.getAuthInstance().signOut().then(() => {
-        localStorage.removeItem("userEmail");
-        location.reload();
-    });
-}
-
-// 🟢 Đăng truyện
-function addPost() {
-    let title = document.getElementById("title").value.trim();
-    let content = document.getElementById("content").value.trim();
-    let category = document.getElementById("category").value;
-    let coverFile = document.getElementById("cover").files[0];
-
-    if (!title || !content || !category) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    if (users.find(u => u.email === email)) {
+        alert("Email này đã được đăng ký!");
         return;
     }
+    
+    users.push({ email, username, password });
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Đăng ký thành công, hãy đăng nhập!");
+}
 
-    let reader = new FileReader();
-    reader.onload = function (e) {
-        let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-        posts.unshift({ title, content, category, cover: e.target.result, comments: [] });
-        localStorage.setItem("posts", JSON.stringify(posts));
-        loadPosts();
-    };
-    if (coverFile) {
-        reader.readAsDataURL(coverFile);
+// Đăng nhập
+function login() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        location.reload();
     } else {
-        let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-        posts.unshift({ title, content, category, cover: "", comments: [] });
-        localStorage.setItem("posts", JSON.stringify(posts));
-        loadPosts();
+        alert("Sai email hoặc mật khẩu!");
     }
 }
 
-// 🟢 Hiển thị truyện
+// Đăng xuất
+function logout() {
+    localStorage.removeItem("user");
+    location.reload();
+}
+
+// Kiểm tra quyền admin
+function checkAdmin(email) {
+    let adminEmail = "sachcuameonho@gmail.com";
+    if (email === adminEmail) {
+        document.getElementById("story-form").classList.remove("hidden");
+    }
+}
+
+// Đăng truyện
+function addPost() {
+    let title = document.getElementById("title").value;
+    let content = document.getElementById("content").value;
+    let category = document.getElementById("category").value;
+    let coverFile = document.getElementById("cover").files[0];
+    let coverURL = coverFile ? URL.createObjectURL(coverFile) : "";
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    posts.unshift({ title, content, category, cover: coverURL, comments: [] });
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    document.getElementById("title").value = "";
+    document.getElementById("content").value = "";
+
+    loadPosts();
+}
+
+// Hiển thị truyện
 function loadPosts() {
     let postList = document.getElementById("post-list");
     postList.innerHTML = "";
 
-    let posts = JSON.parse(localStorage.getItem("posts") || "[]");
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
     posts.forEach((post, index) => {
         let postDiv = document.createElement("div");
         postDiv.classList.add("post");
@@ -71,63 +95,35 @@ function loadPosts() {
             <p><b>Thể loại:</b> ${post.category}</p>
             <p>${post.content}</p>
             <button onclick="deletePost(${index})">Xóa</button>
-            <input type="text" id="comment-${index}" placeholder="Nhập bình luận">
-            <button onclick="addComment(${index})">Gửi</button>
+            <div class="comment-section">
+                <h4>Bình luận</h4>
+                <div id="comments-${index}">
+                    ${post.comments.map(comment => `<p>${comment}</p>`).join("")}
+                </div>
+                <input type="text" id="comment-${index}" placeholder="Nhập bình luận">
+                <button onclick="addComment(${index})">Gửi</button>
+            </div>
         `;
         postList.appendChild(postDiv);
     });
 }
 
-// 🟢 Xóa truyện
+// Xóa truyện
 function deletePost(index) {
-    let posts = JSON.parse(localStorage.getItem("posts") || "[]");
+    let posts = JSON.parse(localStorage.getItem("posts"));
     posts.splice(index, 1);
     localStorage.setItem("posts", JSON.stringify(posts));
     loadPosts();
 }
 
-// 🟢 Bình luận
+// Bình luận
 function addComment(index) {
-    let commentInput = document.getElementById(`comment-${index}`);
-    let commentText = commentInput.value.trim();
+    let comment = document.getElementById(`comment-${index}`).value.trim();
+    if (!comment) return;
 
-    if (!commentText) {
-        alert("Bình luận không được để trống!");
-        return;
-    }
-
-    let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-    posts[index].comments.push(commentText);
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    posts[index].comments.push(comment);
     localStorage.setItem("posts", JSON.stringify(posts));
 
-    commentInput.value = "";
     loadPosts();
-}
-
-// 🟢 Lọc truyện
-document.getElementById("filter-btn").addEventListener("click", function() {
-    let category = document.getElementById("filter-category").value;
-    let postElements = document.querySelectorAll(".post");
-
-    postElements.forEach(post => {
-        let postCategory = post.querySelector("p:nth-child(2)").textContent.split(": ")[1];
-        post.style.display = (!category || postCategory === category) ? "block" : "none";
-    });
-});
-
-// 🟢 Dark Mode
-document.getElementById("toggle-mode").addEventListener("click", function() {
-    document.body.classList.toggle("light-mode");
-});
-
-// 🟢 Tải dữ liệu khi mở trang
-window.onload = function () {
-    let email = localStorage.getItem("userEmail");
-    if (email) {
-        document.getElementById("login-btn").style.display = "none";
-        document.getElementById("logout-btn").style.display = "block";
-        document.getElementById("user-info").textContent = `Chào, ${email}`;
-        checkAdmin(email);
     }
-    loadPosts();
-};
