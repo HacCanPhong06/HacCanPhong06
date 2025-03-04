@@ -3,39 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Truyện</title>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Web Truyện</h1>
-        <div id="user-info">
-            <span id="username"></span>
-            <button id="logout-btn">Đăng xuất</button>
-        </div>
-    </header>
-
-    <nav>
-        <button id="toggle-mode">🌙 Chế độ tối</button>
-    </nav>
-
-    <main>
-        <section id="truyen-hot">
-            <h2>🔥 Truyện Hot</h2>
-            <div id="hot-stories"></div>
-        </section>
-
-        <section id="the-loai">
-            <h2>📚 Thể Loại</h2>
-            <div id="category-list"></div>
-        </section>
-
-        <section id="binh-luan">
-            <h2>💬 Bình Luận Gần Đây</h2>
-            <div id="recent-comments"></div>
-        </section>
-    </main>
-
+    <div class="login-container">
+        <h2>Đăng nhập</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Mật khẩu">
+        <button onclick="login()">Đăng nhập</button>
+        <p>Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
