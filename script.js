@@ -1,7 +1,7 @@
 // Dữ liệu mẫu
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let stories = JSON.parse(localStorage.getItem('stories')) || [];
-const adminEmail = 'admin@example.com';
+const adminEmail = 'sachcuameonho@gmail.com';
 
 // Đăng ký
 document.getElementById('register-form')?.addEventListener('submit', function (e) {
