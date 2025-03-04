@@ -1,3 +1,14 @@
+window.onerror = function(message, source, lineno, colno, error) {
+    let errorMessage = `
+        <p style="color: red;">
+            Lỗi: ${message} <br>
+            File: ${source} <br>
+            Dòng: ${lineno}, Cột: ${colno} <br>
+            Chi tiết: ${error}
+        </p>
+    `;
+    document.body.innerHTML += errorMessage;
+};
 const adminEmail = "sachcuameonho@gmail.com"; // Thay email admin của bạn
 
 // Chuyển đổi giữa đăng nhập và đăng ký
