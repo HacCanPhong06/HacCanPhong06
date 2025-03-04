@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập / Đăng ký</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Đăng nhập</h2>
+
+<div class="container">
+    <h2>Đăng Nhập</h2>
     <input type="email" id="login-email" placeholder="Email">
     <input type="password" id="login-password" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng nhập</button>
+    <button onclick="login()">Đăng Nhập</button>
+    <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+</div>
 
-    <h2>Đăng ký</h2>
+<div class="container hidden" id="register-container">
+    <h2>Đăng Ký</h2>
     <input type="email" id="register-email" placeholder="Email">
     <input type="text" id="register-username" placeholder="Tên đăng nhập">
     <input type="password" id="register-password" placeholder="Mật khẩu">
     <input type="password" id="register-confirm-password" placeholder="Xác nhận mật khẩu">
-    <button onclick="register()">Đăng ký</button>
+    <button onclick="register()">Đăng Ký</button>
+    <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
