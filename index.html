@@ -3,45 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Đăng Truyện</title>
+    <title>Trang Chủ - Blog Đăng Truyện</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Blog Đăng Truyện</h1>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+            <h1>Blog Đăng Truyện</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="library.html">Thư Viện</a></li>
+                <li><a href="categories.html">Thể Loại</a></li>
+                <li><a href="login.html" id="login-link">Đăng Nhập</a></li>
+                <li><a href="admin.html" id="admin-link" style="display: none;">Quản Lý</a></li>
+            </ul>
+        </nav>
         <button id="toggle-mode">🌙 Chế độ tối</button>
-        <button id="login-btn" onclick="showLogin()">Đăng nhập</button>
-        <button id="logout-btn" style="display:none;" onclick="logout()">Đăng xuất</button>
-        <p id="user-info"></p>
     </header>
 
-    <!-- Form đăng nhập/đăng ký -->
-    <div id="auth-form" class="hidden">
-        <h2>Đăng nhập / Đăng ký</h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="text" id="username" placeholder="Tên người dùng">
-        <input type="password" id="password" placeholder="Mật khẩu">
-        <button onclick="register()">Đăng ký</button>
-        <button onclick="login()">Đăng nhập</button>
-    </div>
+    <main>
+        <section id="featured-stories">
+            <h2>Truyện Hot Nhất</h2>
+            <div id="hot-stories"></div>
+        </section>
 
-    <!-- Form đăng truyện (chỉ hiển thị với admin) -->
-    <div id="story-form" class="hidden">
-        <h2>Đăng truyện mới</h2>
-        <input type="text" id="title" placeholder="Tiêu đề truyện">
-        <select id="category">
-            <option value="Nam nữ">Nam nữ</option>
-            <option value="Nữ nữ">Nữ nữ</option>
-            <option value="Nam nam">Nam nam</option>
-        </select>
-        <input type="file" id="cover" accept="image/*">
-        <textarea id="content" placeholder="Nội dung truyện"></textarea>
-        <button onclick="addPost()">Đăng truyện</button>
-    </div>
+        <section id="categories">
+            <h2>Thể Loại</h2>
+            <div id="category-list"></div>
+        </section>
 
-    <!-- Danh sách truyện -->
-    <div id="post-list"></div>
+        <section id="latest-comments">
+            <h2>Bình Luận Gần Đây</h2>
+            <div id="recent-comments"></div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
-                </html>
+</html>
