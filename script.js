@@ -1,4 +1,7 @@
 window.onerror = function(message, source, lineno, colno, error) {
+    alert(`Lỗi: ${message}\nFile: ${source}\nDòng: ${lineno}, Cột: ${colno}\nChi tiết: ${error}`);
+};
+window.onerror = function(message, source, lineno, colno, error) {
     let errorMessage = `
         <p style="color: red;">
             Lỗi: ${message} <br>
