@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="336094742693-nmlhnm17avvek7ilhnfse1alv7kausao.apps.googleusercontent.com">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Đăng Truyện</title>
+    <title>Web Blog Truyện</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
-    <h1>Blog Đăng Truyện</h1>
-<button id="login-btn">Đăng nhập Google</button>
-<button id="logout-btn" style="display:none;">Đăng xuất</button>
-<p id="user-info"></p>
-<button id="toggle-mode">🌙 Chế độ tối</button>
 
-    <!-- Form đăng truyện -->
-    <div class="form-container">
+    <!-- Đăng nhập -->
+    <div id="auth">
+        <div id="user-info"></div>
+        <button id="login-btn" onclick="signIn()">🔑 Đăng nhập</button>
+        <button id="logout-btn" style="display:none;" onclick="signOut()">🚪 Đăng xuất</button>
+    </div>
+
+    <!-- Form đăng truyện (Chỉ Admin thấy) -->
+    <div id="story-form" style="display:none;">
         <input type="text" id="title" placeholder="Tiêu đề truyện">
-<select id="category">
-    <option value="">-- Chọn thể loại --</option>
-    <option value="Nam nữ">Nam nữ</option>
-    <option value="Nữ nữ">Nữ nữ</option>
-    <option value="Nam nam">Nam nam</option>
-</select>
-
-<button id="filter-btn">Lọc truyện</button>
+        <select id="category">
+            <option value="">-- Chọn thể loại --</option>
+            <option value="Nam nữ">Nam nữ</option>
+            <option value="Nữ nữ">Nữ nữ</option>
+            <option value="Nam nam">Nam nam</option>
+        </select>
         <input type="file" id="cover" accept="image/*">
         <textarea id="content" placeholder="Nội dung truyện"></textarea>
         <button onclick="addPost()">Đăng Truyện</button>
     </div>
 
+    <!-- Bộ lọc truyện -->
+    <select id="filter-category">
+        <option value="">-- Lọc theo thể loại --</option>
+        <option value="Nam nữ">Nam nữ</option>
+        <option value="Nữ nữ">Nữ nữ</option>
+        <option value="Nam nam">Nam nam</option>
+    </select>
+    <button id="filter-btn">🔍 Lọc</button>
+
     <!-- Danh sách truyện -->
     <div id="post-list"></div>
 
+    <!-- Nút Dark Mode -->
+    <button id="toggle-mode">🌙 Chế độ tối</button>
+
     <script src="script.js"></script>
 </body>
-</html>
+            </html>
