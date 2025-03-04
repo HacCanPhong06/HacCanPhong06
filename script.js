@@ -1,4 +1,15 @@
-const adminEmail = "sachcuameonho@gmail.com"; // Thay email admin của bạn vào đây
+const adminEmail = "sachcuameonho@gmail.com"; // Thay email admin của bạn
+
+// Chuyển đổi giữa đăng nhập và đăng ký
+function showRegister() {
+    document.querySelector(".container").classList.add("hidden");
+    document.getElementById("register-container").classList.remove("hidden");
+}
+
+function showLogin() {
+    document.querySelector(".container").classList.remove("hidden");
+    document.getElementById("register-container").classList.add("hidden");
+}
 
 // Đăng ký tài khoản
 function register() {
@@ -14,7 +25,7 @@ function register() {
 
     // Xác định vai trò của người dùng
     const role = email === adminEmail ? "admin" : "user";
-    localStorage.setItem(email, JSON.stringify({ username, password, role }));
+    localStorage.setItem(email, JSON.stringify({ email, username, password, role }));
 
     alert("Đăng ký thành công! Hãy đăng nhập.");
     window.location.href = "index.html";
@@ -51,8 +62,8 @@ function checkAdmin() {
         return;
     }
 
-    if (currentUser.role === "admin") {
-        document.getElementById("admin-section").style.display = "block"; // Hiển thị khu vực Admin
+    if (currentUser.email === adminEmail) {
+        document.getElementById("admin-section").style.display = "block";
     }
 
     renderStories();
@@ -86,11 +97,11 @@ function addStory() {
     renderStories();
 }
 
-// Xoá truyện (chỉ Admin mới có quyền)
+// Xoá truyện
 function deleteStory(id) {
     let stories = JSON.parse(localStorage.getItem("stories")) || [];
     stories = stories.filter(story => story.id !== id);
-    
+
     localStorage.setItem("stories", JSON.stringify(stories));
     renderStories();
 }
@@ -99,11 +110,3 @@ function deleteStory(id) {
 document.addEventListener("DOMContentLoaded", function () {
     checkAdmin();
 });
-function checkAdmin() {
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser === adminEmail) {
-        document.getElementById("admin-panel").style.display = "block";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", checkAdmin);
