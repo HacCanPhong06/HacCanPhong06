@@ -3,40 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ - Blog Đăng Truyện</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Web Truyện</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="images/logo.png" alt="Logo">
-            <h1>Blog Đăng Truyện</h1>
+        <h1>Web Truyện</h1>
+        <div id="user-info">
+            <span id="username"></span>
+            <button id="logout-btn">Đăng xuất</button>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="library.html">Thư Viện</a></li>
-                <li><a href="categories.html">Thể Loại</a></li>
-                <li><a href="login.html" id="login-link">Đăng Nhập</a></li>
-                <li><a href="admin.html" id="admin-link" style="display: none;">Quản Lý</a></li>
-            </ul>
-        </nav>
-        <button id="toggle-mode">🌙 Chế độ tối</button>
     </header>
 
+    <nav>
+        <button id="toggle-mode">🌙 Chế độ tối</button>
+    </nav>
+
     <main>
-        <section id="featured-stories">
-            <h2>Truyện Hot Nhất</h2>
+        <section id="truyen-hot">
+            <h2>🔥 Truyện Hot</h2>
             <div id="hot-stories"></div>
         </section>
 
-        <section id="categories">
-            <h2>Thể Loại</h2>
+        <section id="the-loai">
+            <h2>📚 Thể Loại</h2>
             <div id="category-list"></div>
         </section>
 
-        <section id="latest-comments">
-            <h2>Bình Luận Gần Đây</h2>
+        <section id="binh-luan">
+            <h2>💬 Bình Luận Gần Đây</h2>
             <div id="recent-comments"></div>
         </section>
     </main>
