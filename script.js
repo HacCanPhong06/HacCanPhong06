@@ -1,79 +1,110 @@
-// Kiểm tra nếu Local Storage chưa có dữ liệu thì tạo mới
-if (!localStorage.getItem("posts")) {
-    localStorage.setItem("posts", JSON.stringify([]));
+// Định nghĩa email admin
+const adminEmail = "sachcuameonho@gmail.com"; // Thay bằng email admin
+
+// Xử lý đăng nhập Google
+function onSignIn(googleUser) {
+    let profile = googleUser.getBasicProfile();
+    let email = profile.getEmail();
+
+    localStorage.setItem("userEmail", email);
+    document.getElementById("user-info").textContent = `Chào, ${profile.getName()} (${email})`;
+    document.getElementById("login-btn").style.display = "none";
+    document.getElementById("logout-btn").style.display = "block";
+
+    checkAdmin(email);
 }
 
-// Hàm đăng truyện
-function addPost() {
+function checkAdmin(email) {
+    if (email === adminEmail) {
+        document.getElementById("story-form").style.display = "block"; // Hiển thị form cho admin
+    } else {
+        document.getElementById("story-form").style.display = "none"; // Ẩn form nếu không phải admin
+    }
+}
+
+// Đăng xuất
+function signOut() {
+    localStorage.removeItem("userEmail");
+    location.reload();
+}
+
+// Kiểm tra đăng nhập khi tải trang
+window.onload = function() {
+    let savedEmail = localStorage.getItem("userEmail");
+    if (savedEmail) {
+        document.getElementById("login-btn").style.display = "none";
+        document.getElementById("logout-btn").style.display = "block";
+        document.getElementById("user-info").textContent = `Chào, ${savedEmail}`;
+        checkAdmin(savedEmail);
+    }
+};
+
+// Bắt sự kiện đăng xuất
+document.getElementById("logout-btn").addEventListener("click", signOut);
+
+// Thêm truyện mới (Chỉ admin mới được phép đăng)
+document.getElementById("add-story-btn").addEventListener("click", function() {
+    let email = localStorage.getItem("userEmail");
+
+    if (email !== adminEmail) {
+        alert("Bạn không có quyền đăng truyện!");
+        return;
+    }
+
     let title = document.getElementById("title").value;
+    let category = document.getElementById("category").value;
     let content = document.getElementById("content").value;
 
-    if (title.trim() === "" || content.trim() === "") {
-        alert("Vui lòng nhập đủ tiêu đề và nội dung!");
+    if (!title || !content || !category) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
         return;
     }
 
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.unshift({ title: title, content: content, comments: [] }); // Thêm mảng comments
-    localStorage.setItem("posts", JSON.stringify(posts));
+    let post = `
+        <div class="post">
+            <h2>${title}</h2>
+            <p><strong>Thể loại:</strong> ${category}</p>
+            <p>${content}</p>
+        </div>
+    `;
 
+    document.getElementById("post-list").innerHTML += post;
+
+    // Xóa dữ liệu sau khi đăng
     document.getElementById("title").value = "";
     document.getElementById("content").value = "";
+});
 
-    loadPosts();
-}
+// Bộ lọc thể loại
+document.getElementById("filter-btn").addEventListener("click", function() {
+    let selectedCategory = document.getElementById("category").value;
+    let posts = document.querySelectorAll(".post");
 
-// Hàm hiển thị truyện
-function loadPosts() {
-    let postList = document.getElementById("post-list");
-    postList.innerHTML = "";
-
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.forEach((post, index) => {
-        let postDiv = document.createElement("div");
-        postDiv.classList.add("post");
-        postDiv.innerHTML = `
-            <h3>${post.title}</h3>
-            <p>${post.content}</p>
-            <button onclick="deletePost(${index})">Xóa</button>
-            <div class="comment-section">
-                <h4>Bình luận</h4>
-                <div id="comments-${index}">
-                    ${post.comments.map(comment => `<p>${comment}</p>`).join("")}
-                </div>
-                <input type="text" id="comment-${index}" placeholder="Nhập bình luận">
-                <button onclick="addComment(${index})">Gửi</button>
-            </div>
-        `;
-        postList.appendChild(postDiv);
+    posts.forEach(post => {
+        if (selectedCategory === "" || post.innerHTML.includes(selectedCategory)) {
+            post.style.display = "block";
+        } else {
+            post.style.display = "none";
+        }
     });
-}
+});
 
-// Hàm xóa truyện
-function deletePost(index) {
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.splice(index, 1);
-    localStorage.setItem("posts", JSON.stringify(posts));
-    loadPosts();
-}
-
-// Hàm thêm bình luận
-function addComment(index) {
-    let commentInput = document.getElementById(`comment-${index}`);
-    let commentText = commentInput.value.trim();
-
-    if (commentText === "") {
-        alert("Không được để trống bình luận!");
+// Thêm bình luận
+document.getElementById("add-comment-btn").addEventListener("click", function() {
+    let comment = document.getElementById("comment-input").value;
+    if (!comment) {
+        alert("Vui lòng nhập nội dung bình luận!");
         return;
     }
 
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts[index].comments.push(commentText);
-    localStorage.setItem("posts", JSON.stringify(posts));
+    let commentDiv = document.createElement("div");
+    commentDiv.textContent = comment;
+    document.getElementById("comment-list").appendChild(commentDiv);
 
-    commentInput.value = "";
-    loadPosts();
-}
+    document.getElementById("comment-input").value = "";
+});
 
-// Tải truyện khi mở trang
-window.onload = loadPosts;
+// Chuyển chế độ tối
+document.getElementById("toggle-mode").addEventListener("click", function() {
+    document.body.classList.toggle("dark-mode");
+});
