@@ -1,129 +1,50 @@
-// Kiểm tra đăng nhập
-window.onload = function() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-        document.getElementById("login-btn").style.display = "none";
-        document.getElementById("logout-btn").style.display = "block";
-        document.getElementById("user-info").textContent = `Chào, ${user.username} (${user.email})`;
-        checkAdmin(user.email);
-    }
-    loadPosts();
-};
+document.addEventListener("DOMContentLoaded", function () {
+    // Chế độ Dark Mode
+    let mode = localStorage.getItem("theme") || "dark";
+    document.body.classList.toggle("light-mode", mode === "light");
 
-// Hiển thị form đăng nhập
-function showLogin() {
-    document.getElementById("auth-form").classList.toggle("hidden");
-}
-
-// Đăng ký
-function register() {
-    let email = document.getElementById("email").value;
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    if (users.find(u => u.email === email)) {
-        alert("Email này đã được đăng ký!");
-        return;
-    }
-    
-    users.push({ email, username, password });
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Đăng ký thành công, hãy đăng nhập!");
-}
-
-// Đăng nhập
-function login() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let user = users.find(u => u.email === email && u.password === password);
-
-    if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        location.reload();
-    } else {
-        alert("Sai email hoặc mật khẩu!");
-    }
-}
-
-// Đăng xuất
-function logout() {
-    localStorage.removeItem("user");
-    location.reload();
-}
-
-// Kiểm tra quyền admin
-function checkAdmin(email) {
-    let adminEmail = "sachcuameonho@gmail.com";
-    if (email === adminEmail) {
-        document.getElementById("story-form").classList.remove("hidden");
-    }
-}
-
-// Đăng truyện
-function addPost() {
-    let title = document.getElementById("title").value;
-    let content = document.getElementById("content").value;
-    let category = document.getElementById("category").value;
-    let coverFile = document.getElementById("cover").files[0];
-    let coverURL = coverFile ? URL.createObjectURL(coverFile) : "";
-
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-    posts.unshift({ title, content, category, cover: coverURL, comments: [] });
-    localStorage.setItem("posts", JSON.stringify(posts));
-
-    document.getElementById("title").value = "";
-    document.getElementById("content").value = "";
-
-    loadPosts();
-}
-
-// Hiển thị truyện
-function loadPosts() {
-    let postList = document.getElementById("post-list");
-    postList.innerHTML = "";
-
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-    posts.forEach((post, index) => {
-        let postDiv = document.createElement("div");
-        postDiv.classList.add("post");
-        postDiv.innerHTML = `
-            ${post.cover ? `<img src="${post.cover}" class="cover-img">` : ""}
-            <h3>${post.title}</h3>
-            <p><b>Thể loại:</b> ${post.category}</p>
-            <p>${post.content}</p>
-            <button onclick="deletePost(${index})">Xóa</button>
-            <div class="comment-section">
-                <h4>Bình luận</h4>
-                <div id="comments-${index}">
-                    ${post.comments.map(comment => `<p>${comment}</p>`).join("")}
-                </div>
-                <input type="text" id="comment-${index}" placeholder="Nhập bình luận">
-                <button onclick="addComment(${index})">Gửi</button>
-            </div>
-        `;
-        postList.appendChild(postDiv);
+    document.getElementById("toggle-mode").addEventListener("click", function () {
+        mode = mode === "dark" ? "light" : "dark";
+        localStorage.setItem("theme", mode);
+        document.body.classList.toggle("light-mode", mode === "light");
+        this.textContent = mode === "light" ? "🌞 Chế độ sáng" : "🌙 Chế độ tối";
     });
-}
 
-// Xóa truyện
-function deletePost(index) {
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.splice(index, 1);
-    localStorage.setItem("posts", JSON.stringify(posts));
-    loadPosts();
-}
-
-// Bình luận
-function addComment(index) {
-    let comment = document.getElementById(`comment-${index}`).value.trim();
-    if (!comment) return;
-
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts[index].comments.push(comment);
-    localStorage.setItem("posts", JSON.stringify(posts));
-
-    loadPosts();
+    // Kiểm tra đăng nhập
+    let user = localStorage.getItem("user");
+    if (user) {
+        let userData = JSON.parse(user);
+        document.getElementById("login-link").textContent = `Xin chào, ${userData.name}`;
+        if (userData.role === "admin") {
+            document.getElementById("admin-link").style.display = "inline";
+        }
     }
+
+    // Load truyện hot và bình luận gần đây
+    loadHotStories();
+    loadRecentComments();
+});
+
+function loadHotStories() {
+    let stories = JSON.parse(localStorage.getItem("stories")) || [];
+    let hotStories = stories.sort((a, b) => b.views - a.views).slice(0, 5);
+    let container = document.getElementById("hot-stories");
+    container.innerHTML = hotStories.map(story =>
+        `<div class="story">
+            <img src="${story.cover}" alt="${story.title}">
+            <h3>${story.title}</h3>
+            <p>${story.views} lượt đọc</p>
+        </div>`
+    ).join("");
+}
+
+function loadRecentComments() {
+    let comments = JSON.parse(localStorage.getItem("comments")) || [];
+    let recentComments = comments.slice(-5);
+    let container = document.getElementById("recent-comments");
+    container.innerHTML = recentComments.map(comment =>
+        `<div class="comment">
+            <p><strong>${comment.user}:</strong> ${comment.text}</p>
+        </div>`
+    ).join("");
+                        }
