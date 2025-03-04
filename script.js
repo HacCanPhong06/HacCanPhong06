@@ -99,3 +99,11 @@ function deleteStory(id) {
 document.addEventListener("DOMContentLoaded", function () {
     checkAdmin();
 });
+function checkAdmin() {
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser === adminEmail) {
+        document.getElementById("admin-panel").style.display = "block";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", checkAdmin);
