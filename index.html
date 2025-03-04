@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập / Đăng Ký</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="container">
-    <h2>Đăng Nhập</h2>
-    <input type="email" id="login-email" placeholder="Email">
-    <input type="password" id="login-password" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng Nhập</button>
-    <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
-</div>
-
-<div class="container hidden" id="register-container">
-    <h2>Đăng Ký</h2>
-    <input type="email" id="register-email" placeholder="Email">
-    <input type="text" id="register-username" placeholder="Tên đăng nhập">
-    <input type="password" id="register-password" placeholder="Mật khẩu">
-    <input type="password" id="register-confirm-password" placeholder="Xác nhận mật khẩu">
-    <button onclick="register()">Đăng Ký</button>
-    <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
-</div>
-
-<script src="script.js"></script>
+    <header>
+        <h1>Web Truyện</h1>
+        <input type="text" id="search" placeholder="Tìm truyện...">
+        <div id="user-account">
+            <button id="login-btn" onclick="window.location.href='login.html'">Đăng nhập</button>
+            <button id="register-btn" onclick="window.location.href='register.html'">Đăng ký</button>
+        </div>
+    </header>
+    <main>
+        <section id="featured-stories">
+            <h2>Truyện Nổi bật🔥</h2>
+            <div id="story-list"></div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Web Truyện. All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
