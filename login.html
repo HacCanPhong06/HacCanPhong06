@@ -3,31 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Đăng nhập - Web Truyện</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Đăng Nhập</h2>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng Nhập</button>
-    <p>Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+    <main>
+        <h2>Đăng Nhập</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Mật khẩu">
+        <button id="login-btn">Đăng nhập</button>
+        
+        <h2>Đăng Ký</h2>
+        <input type="text" id="username" placeholder="Tên">
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Mật khẩu">
+        <button id="register-btn">Đăng ký</button>
+    </main>
 
-    <script>
-        function login() {
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            let user = users.find(u => u.email === email && u.password === password);
-            if (user) {
-                localStorage.setItem("user", JSON.stringify(user));
-                alert("Đăng nhập thành công!");
-                window.location.href = "index.html";
-            } else {
-                alert("Sai email hoặc mật khẩu!");
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
