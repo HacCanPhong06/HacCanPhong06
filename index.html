@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="336094742693-nmlhnm17avvek7ilhnfse1alv7kausao.apps.googleusercontent.com">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Đăng Truyện</title>
@@ -10,40 +10,29 @@
 </head>
 <body>
     <h1>Blog Đăng Truyện</h1>
-    
-    <!-- Đăng nhập & Đăng xuất -->
-    <button id="login-btn">Đăng nhập Google</button>
-    <button id="logout-btn" style="display:none;">Đăng xuất</button>
-    <p id="user-info"></p>
-    
-    <!-- Nút chuyển chế độ tối -->
-    <button id="toggle-mode">🌙 Chế độ tối</button>
+<button id="login-btn">Đăng nhập Google</button>
+<button id="logout-btn" style="display:none;">Đăng xuất</button>
+<p id="user-info"></p>
+<button id="toggle-mode">🌙 Chế độ tối</button>
 
-    <!-- Form đăng truyện (Chỉ hiển thị cho admin) -->
-    <div id="story-form" style="display:none;">
+    <!-- Form đăng truyện -->
+    <div class="form-container">
         <input type="text" id="title" placeholder="Tiêu đề truyện">
-        <select id="category">
-            <option value="">-- Chọn thể loại --</option>
-            <option value="Nam nữ">Nam nữ</option>
-            <option value="Nữ nữ">Nữ nữ</option>
-            <option value="Nam nam">Nam nam</option>
-        </select>
-        <button id="filter-btn">Lọc truyện</button>
+<select id="category">
+    <option value="">-- Chọn thể loại --</option>
+    <option value="Nam nữ">Nam nữ</option>
+    <option value="Nữ nữ">Nữ nữ</option>
+    <option value="Nam nam">Nam nam</option>
+</select>
+
+<button id="filter-btn">Lọc truyện</button>
         <input type="file" id="cover" accept="image/*">
         <textarea id="content" placeholder="Nội dung truyện"></textarea>
-        <button id="add-story-btn">Đăng Truyện</button>
+        <button onclick="addPost()">Đăng Truyện</button>
     </div>
 
     <!-- Danh sách truyện -->
     <div id="post-list"></div>
-
-    <!-- Form bình luận -->
-    <div id="comment-section">
-        <h3>Bình luận</h3>
-        <textarea id="comment-input" placeholder="Viết bình luận..."></textarea>
-        <button id="add-comment-btn">Gửi</button>
-        <div id="comment-list"></div>
-    </div>
 
     <script src="script.js"></script>
 </body>
