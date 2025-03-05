@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "title": "Truyện 1",
+        "description": "Giới thiệu về truyện 1...",
+        "image": "truyen1.jpg",
+        "likes": 500
+    },
+    {
+        "id": 2,
+        "title": "Truyện 2",
+        "description": "Giới thiệu về truyện 2...",
+        "image": "truyen2.jpg",
+        "likes": 400
+    }
+]
