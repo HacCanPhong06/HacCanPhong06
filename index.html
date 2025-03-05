@@ -4,26 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
         <h1>Web Truyện</h1>
-        <input type="text" id="search" placeholder="Tìm truyện...">
-        <div id="user-account">
-            <button id="login-btn" onclick="window.location.href='login.html'">Đăng nhập</button>
-            <button id="register-btn" onclick="window.location.href='register.html'">Đăng ký</button>
+        <input type="text" id="search" placeholder="Tìm kiếm truyện...">
+        <div class="user-info">
+            <span id="username"></span>
+            <button id="logout">Đăng xuất</button>
         </div>
+<button onclick="location.href='library.html'">📚 Thư Viện</button>
     </header>
+
     <main>
-        <section id="featured-stories">
-            <h2>Truyện Nổi bật🔥</h2>
-            <div id="story-list"></div>
+        <section id="hot-stories">
+            <h2>Truyện Nổi Bật</h2>
+            <div class="story-list"></div>
+        </section>
+
+        <section id="ranking">
+            <h2>Bảng Xếp Hạng</h2>
+            <div class="ranking-list"></div>
+        </section>
+
+        <section id="latest-comments">
+            <h2>Bình Luận Gần Đây</h2>
+            <div class="comment-list"></div>
         </section>
     </main>
-    <footer>
-        <p>© 2025 Web Truyện. All rights reserved.</p>
-    </footer>
-    <script src="scripts.js"></script>
+
+    <script src="assets/js/main.js"></script>
+document.addEventListener("DOMContentLoaded", function () {
+    let stories = JSON.parse(localStorage.getItem("stories")) || [];
+    let ratings = JSON.parse(localStorage.getItem("storyRatings")) || {};
+
+    stories.forEach(story => {
+        let scores = ratings[story.id] || [];
+        let avgScore = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : "0";
+        document.getElementById(`story-score-${story.id}`).textContent = avgScore;
+    });
+});
+
+<p>Điểm đánh giá: <span id="story-score-123">0</span></p>
+
+<p>❤️ Lượt tim: <span id="story-likes-123">0</span></p>
+
+document.addEventListener("DOMContentLoaded", function () {
+    let stories = JSON.parse(localStorage.getItem("stories")) || [];
+    let likes = JSON.parse(localStorage.getItem("storyLikes")) || {};
+
+    stories.forEach(story => {
+        let count = likes[story.id]?.length || 0;
+        document.getElementById(`story-likes-${story.id}`).textContent = count;
+    });
+});
+
+<p>⭐ Lượt theo dõi: <span id="story-follows-123">0</span></p>
 </body>
-</html>
+    </html>
