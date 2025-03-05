@@ -25,6 +25,40 @@
             <p>Đã có tài khoản? <a href="#" id="login-link">Đăng nhập</a></p>
         </form>
     </div>
+    <script>
+        // Chuyển đổi giữa form đăng nhập và đăng ký
+        document.getElementById('register-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        });
+
+        document.getElementById('login-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        });
+
+        // Xác thực mật khẩu khi đăng ký
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                alert('Mật khẩu và xác nhận mật khẩu không khớp!');
+            }
+        });
+
+        // Xử lý đăng nhập
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Thêm logic xử lý đăng nhập ở đây
+            // Ví dụ: gửi yêu cầu đến server để xác thực
+        });
+    </script>
     <script src="assets/js/auth.js"></script>
 </body>
-    </html>
+</html>
