@@ -1,5 +1,15 @@
 const ADMIN_EMAIL = "sachcuameonho@gmail.com"; // Thay email admin của bạn vào đây
 
+document.addEventListener("DOMContentLoaded", function () {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (currentUser && currentUser.role === "admin") {
+        document.getElementById("btnDangTruyen").style.display = "block"; 
+    } else {
+        document.getElementById("btnDangTruyen").style.display = "none";
+    }
+});
+
 function checkAdmin() {
     let currentUser = localStorage.getItem("currentUser");
     if (currentUser !== ADMIN_EMAIL) {
