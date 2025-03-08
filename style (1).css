@@ -1,0 +1,299 @@
+body {
+    font-family: "Times New Roman", sans-serif;
+    background-color: #121212;
+    color: #ccc;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 15px;
+}
+
+header h1 {
+    color: #00aaff;
+}
+
+#search {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+#account {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    background: #222;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #00aaff;
+}
+
+.login-container, .register-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #00aaff;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+}
+
+button {
+    padding: 10px;
+    width: 100%;
+    background: #00aaff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.admin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    text-align: center;
+}
+
+textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #00aaff;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #333;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button.delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+body {
+    font-family: "Times New Roman", sans-serif;
+    background-color: #111;
+    color: #ccc;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background: #222;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #00aaff;
+}
+
+#search {
+    padding: 5px;
+    border: 1px solid #00aaff;
+    background: #333;
+    color: white;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+}
+
+#user-email {
+    margin-right: 10px;
+}
+
+button {
+    background: #00aaff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+section {
+    background: #222;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#story-info {
+    text-align: center;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#chapters ul {
+    list-style: none;
+    padding: 0;
+}
+
+#chapters li {
+    background: #333;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#comment-list {
+    background: #222;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #333;
+    color: white;
+    border: none;
+}
+
+button {
+    margin-top: 10px;
+}
+
+#chapter-info {
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#chapter-content {
+    white-space: pre-line;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+#chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #777;
+}
+
+#auth-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#auth-container input {
+    width: 90%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#auth-container button {
+    width: 100%;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggle-auth {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#profile-container {
+    width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+#logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

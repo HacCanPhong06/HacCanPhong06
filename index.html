@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Web Truyện</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="index.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Web Truyện</h1>
+        <input type="text" id="search" placeholder="Tìm kiếm truyện...">
+        <div id="user-info">
+            <span id="user-email"></span>
+            <button onclick="logout()">Đăng xuất</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="featured-stories">
+            <h2>🔥 Truyện Nổi Bật</h2>
+            <div id="top-stories"></div>
+        </section>
+
+        <section id="ranking">
+            <h2>🏆 Xếp Hạng Truyện</h2>
+            <div id="top-liked"></div>
+            <div id="top-rated"></div>
+        </section>
+
+        <section id="genre-list">
+            <h2>📚 Thể Loại</h2>
+            <button onclick="filterGenre('Nữ nữ')">Nữ nữ</button>
+            <button onclick="filterGenre('Nam nữ')">Nam nữ</button>
+            <button onclick="filterGenre('Nam nam')">Nam nam</button>
+        </section>
+
+        <section id="comments">
+            <h2>💬 Bình luận gần đây</h2>
+            <div id="recent-comments"></div>
+        </section>
+    </main>
+</body>
+</html>
