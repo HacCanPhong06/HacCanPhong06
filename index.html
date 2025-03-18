@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCP06</title>
+    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+      <div class="top">
+<h1>Web truyện của Hắc Cẩn Phong!</h1>
+<div id="chao">
+   <p>TAS-207325136036</p>
+   </div>
+  </div>
+  <div id="menu">
+    <ul>
+      <li><a href="GL/GL.html">Girls love</a></li>
+      <li><a href="BL/BL.html">Boys love</a></li>
+     <li><a href="BG/BG.html">Boy girl</a></li>
+    </ul>
+  </div>
+   </div>
+   
+    <h2>Truyện mới</h2>
+    
+    <div class="TPGS">
+    <div id="img">
+       <img src= GL/TPGS/TPGS.png width="300px" height="500px"> <br>
+    </div>
+    <div id="Namestory">
+      <p>Trưởng phòng ghen sao?</p>
+    </div>
+    <div id="button">
+      <button><a href="Truongphongghensao.html" 
+    class="btn btn-secondary btn-lg active">Đọc</a></button>
+    </div>
+    <div id="Gioithieutruyen">
+      <p>Tác giả: Hắc Cẩn Phong (Hoàng Vũ)</p>
+      <p>Thể loại: Nữ nữ, 1×1, ngược, ngọt, hiện đại, công sở, HE?</p>
+    </div>
+</div>
+<br>
+<hr>
+
+    <!-- Đăng nhập -->
+    <div class="login-section">
+        <h2>Đăng nhập</h2>
+        <input type="text" id="username" placeholder="Tên người dùng">
+        <button onclick="login()">Đăng nhập</button>
+    </div>
+
+    <!-- Thông báo -->
+    <div id="notification" class="hidden"></div>
+
+    <div class="comment-section">
+        <h2>Bình luận</h2>
+        <textarea id="commentInput" placeholder="Viết bình luận..." required></textarea>
+        <button onclick="addComment()">Gửi</button>
+
+        <div id="commentList"></div>
+    </div>
+
+    <script src="comment.js"></script>
+</body>
+</html>
