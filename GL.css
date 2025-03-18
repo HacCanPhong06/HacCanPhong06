@@ -23,6 +23,7 @@ body {
   font-size: 12px;
   margin: 0;
 }
+  
 .top {
   box-sizing: boder-box;
   background: grey;
@@ -130,6 +131,7 @@ a {
     width: 250px;
     margin: 20px auto;
 }
+  
 .login-section #username input text {
   color: white;
 }
