@@ -23,6 +23,7 @@ body {
   font-size: 12px;
   margin: 0;
 }
+  
 .top {
   box-sizing: boder-box;
   background: grey;
@@ -99,6 +100,7 @@ a {
 #Gioithieutruyen {
   border: 1px solid grey;
   margin-top: 15px;
+  text-indent:12px
 }
 
 .login-section, #notification, .comment-section {
