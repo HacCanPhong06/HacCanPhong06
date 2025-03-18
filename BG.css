@@ -95,12 +95,12 @@ a {
   font-size: 12px;
   text-align: left;
   padding: 0 10px 0 10px;
+  text-indent:12px;
 }
 
 #Gioithieutruyen {
   border: 1px solid grey;
   margin-top: 15px;
-  text-indent:12px
 }
 
 .login-section, #notification, .comment-section {
