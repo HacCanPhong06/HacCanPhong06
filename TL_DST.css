@@ -67,6 +67,19 @@ body {
   display: block;
 }
 
+#LKĐT p {
+  font-family: Arial;
+  font-size: 12px;
+  margin-left: 10px;
+  color: grey;
+}
+
+#LKĐT p a {
+  text-decoration: none;
+  color: grey;
+  font-size: 12px;
+}
+
 h2, .DST {
   padding: 0 25px 0 25px;
   text-align: center;
