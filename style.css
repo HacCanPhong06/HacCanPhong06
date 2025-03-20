@@ -81,6 +81,19 @@ h2, .TPGS, .Phan {
   display: block;
 }
 
+#LKĐT p {
+  font-family: Arial;
+  font-size: 12px;
+  margin-left: 10px;
+  color: grey;
+}
+
+#LKĐT p a {
+  text-decoration: none;
+  color: grey;
+  font-size: 12px;
+}
+
 #Namestory p {
   font-family: Times New Roman;
   font-weight: bold;
