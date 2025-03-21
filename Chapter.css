@@ -103,6 +103,25 @@ h3 {
   margin-right: 10px;
 }
 
+.muiten {
+  color: purple;
+  text-align: center;
+}
+
+.muiten a {
+  text-decoration: none;
+  color: purple;
+  font-size: 15px;
+}
+
+.muiten #left {
+  margin-right: 10px;
+}
+
+.muiten #right {
+  margin-left: 10px;
+}
+
 #main {
   padding: 0 20px 0 20px;
 }
