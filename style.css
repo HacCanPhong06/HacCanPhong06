@@ -113,6 +113,7 @@ h2, .TPGS, .Phan {
 
 #Gioithieutruyen {
   border: 1px solid grey;
+  border-radius: 5px;
   margin-top: 15px;
 }
 
