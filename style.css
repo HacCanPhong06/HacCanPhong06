@@ -8,7 +8,7 @@ h1 {
   text-align: center;
   font-family: "Great Vibes", cursive;
   font-weight: 400, bold;
-  font-style: normal; Roman;
+  font-style: normal;
   text-shadow: 1px 1px white;
 }
 
@@ -44,7 +44,7 @@ a {
   font-size: 15px;
   font-family: "Tektur", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: normal;
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
